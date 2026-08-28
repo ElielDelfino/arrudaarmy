@@ -4,6 +4,8 @@ node_modules/
 # Build
 dist/
 dist-ssr/
+.next/
+out/
 
 # Logs
 logs/
@@ -21,8 +23,12 @@ pnpm-debug.log*
 *.swp
 *.swo
 
-# Vite
+# Vite / Next.js
 *.local
+next-env.d.ts
+
+# Env
+.env*
 
 # Test & coverage
 coverage/
