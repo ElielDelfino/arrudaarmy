@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+dist-ssr/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor & OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Vite
+*.local
+
+# Test & coverage
+coverage/
+
+# Cache
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Claude Code
+.claude/
+
+# Docs internas (não publicadas no repo)
+docs/
+
+# Firebase
+.firebase/
+
+# Anotações temporárias de secrets (nunca commitar)
+SECRETS-GITHUB.txt
+
+# Notas internas de planejamento (não publicadas no repo)
+
+
+# Intermediários do processamento de imagens (regeneráveis — não commitar)
+assets/
