@@ -6,22 +6,22 @@ const STEPS = [
   {
     n: "01",
     title: "Avaliação",
-    text: "Ponto de partida real: rotina, histórico, limitações e objetivo — sem meia palavra.",
+    text: "Antes de definir qualquer estratégia, entendemos o ponto de partida: rotina, histórico, objetivo, limitações e o que realmente precisa ser ajustado.",
   },
   {
     n: "02",
     title: "Planejamento",
-    text: "Treino e dieta desenhados para a sua rotina, não para uma planilha padrão de internet.",
+    text: "A estratégia é construída de forma individual, respeitando sua rotina, seus objetivos e sua realidade — sem copiar protocolos ou encaixar você em uma planilha pronta.",
   },
   {
     n: "03",
     title: "Execução",
-    text: "Você entra em campo. Ajuste fino toda semana, conforme a resposta do seu corpo.",
+    text: "É onde o planejamento encontra a prática. Você executa, nós acompanhamos sua resposta e identificamos o que precisa ser ajustado ao longo do processo.",
   },
   {
     n: "04",
     title: "Acompanhamento",
-    text: "Contato direto comigo. Suporte contínuo até o resultado aparecer — e depois dele também.",
+    text: "Você não fica sozinho depois de receber o planejamento. O contato é próximo, as dúvidas são acompanhadas e a estratégia evolui junto com seus resultados.",
   },
 ];
 

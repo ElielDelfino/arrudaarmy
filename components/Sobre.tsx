@@ -103,10 +103,21 @@ export default function Sobre() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 max-w-xl text-chrome-dim leading-relaxed"
           >
-            Arruda Army não é um aplicativo nem uma consultoria em série.
-            Cada aluno é acompanhado diretamente — do plano à execução, do
-            ajuste fino ao resultado — porque progresso de verdade não sai
-            de fórmula pronta nem de planilha copiada.
+            Na Arruda Army, cada aluno é acompanhado de perto, com estratégia
+            construída de acordo com sua rotina, objetivo e evolução. Nada de
+            protocolos genéricos ou planilhas copiadas: o planejamento é
+            individual, o acompanhamento é constante e cada ajuste acontece
+            quando precisa acontecer.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.12 }}
+            className="mt-4 max-w-xl text-chrome-dim leading-relaxed"
+          >
+            Você não entra para seguir uma fórmula. Entra para seguir uma
+            estratégia.
           </motion.p>
 
           <motion.ul
