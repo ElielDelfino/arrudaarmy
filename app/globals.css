@@ -85,3 +85,38 @@ body {
     radial-gradient(ellipse at 20% -10%, rgba(237, 239, 238, 0.06), transparent 60%),
     radial-gradient(ellipse at 100% 110%, rgba(1, 9, 11, 0.7), transparent 55%);
 }
+
+/* Faixa de depoimentos deslizando sem fim — components/Depoimentos.tsx
+   duplica a lista de cards e anima a faixa até -50%, criando um loop
+   contínuo sem salto perceptível. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Flutuação sutil das fotos sobrepostas da seção Sobre (components/Sobre.tsx) —
+   cada foto usa uma das duas variantes com delay escalonado, pra não
+   flutuarem todas em sincronia. */
+@keyframes photo-float-a {
+  0%,
+  100% {
+    transform: translate(0px);
+  }
+  50% {
+    transform: translate(6px, -14px);
+  }
+}
+
+@keyframes photo-float-b {
+  0%,
+  100% {
+    transform: translate(0px);
+  }
+  50% {
+    transform: translate(-6px, -10px);
+  }
+}

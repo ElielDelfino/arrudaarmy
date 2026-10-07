@@ -8,6 +8,7 @@ const LINKS = [
   { href: "#sobre", label: "Sobre" },
   { href: "#metodo", label: "Método" },
   { href: "#resultados", label: "Resultados" },
+  { href: "#depoimentos", label: "Depoimentos" },
 ];
 
 export default function Nav() {

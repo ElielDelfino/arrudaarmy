@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Sobre este repositório
 
-Landing page estática para "Arruda Army" (personal trainer/coach), construída em cima dos assets em `assets/`. Ainda não há código-fonte nem `.git` neste repositório — stack e deploy já foram decididos (ver `docs/`), mas o projeto ainda não foi escafoldado.
+Landing page estática para "Arruda Army" (personal trainer/coach), construída em cima dos assets em `assets/`. Projeto já escafoldado (Next.js + Tailwind + Motion, ver `docs/STACK.md`), com CI/CD configurado — push na branch `main` dispara build + deploy automático no Firebase Hosting (ver `docs/SETUP-DEPLOY.md`).
 
 ## Documentação
 
@@ -19,7 +19,7 @@ Ao adicionar uma decisão nova ou mudar uma existente, atualize o arquivo corres
 
 ## Regras rápidas (sempre valem)
 
-- **Nunca publicar as fotos de `assets/alunos/`** sem confirmar autorização do aluno — ver @docs/SECURITY.md.
+- **Nunca publicar as fotos de `assets/alunos/` nem os prints de `assets/depoimentos/`** sem confirmar autorização — ver @docs/SECURITY.md.
 - **Nunca commitar segredos** (`.env`, chaves, tokens) — usar GitHub Secrets no CI. O deploy do Firebase usa Workload Identity Federation, não chave JSON de service account.
 - **Antes de configurar CI/CD**, confirmar que o repositório já tem `git init` + remoto no GitHub — é pré-requisito.
 - Repositório do usuário usado como referência de padrão de deploy: `~/storage/opencode-dev/workspace/chill-store-main-2` (ver @docs/SETUP-DEPLOY.md).

@@ -5,13 +5,78 @@ import { motion } from "motion/react";
 
 const PILARES = ["Treino sob medida", "Contato direto", "Sem planilha genérica"];
 
+interface FotoSobre {
+  src: string;
+  className: string;
+  style: React.CSSProperties;
+  /** Visível só a partir do md (desktop) — no mobile aparecem só 3 fotos. */
+  desktopOnly?: boolean;
+}
+
+// Colagem inspirada na seção "Sobre" de arturcalheiros.revvistudios.com —
+// fotos (assets/hugoarruda/sobremim{1,2,4,5,6}) sobrepostas em posições
+// fixas (%), todas na mesma proporção (3:4, igual à sobremim1), com leve
+// flutuação (ver @keyframes em app/globals.css). sobremim2 (ele com os
+// alunos) fica no centro, maior. No mobile só 3 fotos aparecem — sobremim1,
+// sobremim2 e sobremim5 (sobremim6/sobremim4 têm `desktopOnly: true`).
+const FOTOS: FotoSobre[] = [
+  {
+    src: "/sobre/sobremim6.webp",
+    className: "animate-[photo-float-a_7s_ease-in-out_infinite]",
+    style: { top: "0%", left: "0%", width: "36%", aspectRatio: "3 / 4", zIndex: 1, animationDelay: "0s" },
+    desktopOnly: true,
+  },
+  {
+    src: "/sobre/sobremim1.webp",
+    className: "animate-[photo-float-b_8s_ease-in-out_infinite]",
+    style: { bottom: "2%", left: "4%", width: "37%", aspectRatio: "3 / 4", zIndex: 2, animationDelay: "0.5s" },
+  },
+  {
+    // Sem `top` no style: a posição vertical vem das classes abaixo (mais
+    // centralizada no navegador normal, a partir do md — ver `top-[...]`).
+    src: "/sobre/sobremim2.webp",
+    className: "-top-[6%] animate-[photo-float-a_7s_ease-in-out_infinite] md:top-[20%]",
+    style: { left: "28%", width: "48%", aspectRatio: "3 / 4", zIndex: 5, animationDelay: "1s" },
+  },
+  {
+    src: "/sobre/sobremim4.webp",
+    className: "animate-[photo-float-b_8s_ease-in-out_infinite]",
+    style: { top: "0%", right: "0%", width: "34%", aspectRatio: "3 / 4", zIndex: 3, animationDelay: "1.5s" },
+    desktopOnly: true,
+  },
+  {
+    src: "/sobre/sobremim5.webp",
+    className: "animate-[photo-float-a_7s_ease-in-out_infinite]",
+    style: { bottom: "0%", right: "2%", width: "38%", aspectRatio: "3 / 4", zIndex: 2, animationDelay: "2s" },
+  },
+];
+
 export default function Sobre() {
   return (
     <section
       id="sobre"
-      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center bg-teal-900 py-16 md:py-24"
+      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center overflow-hidden bg-teal-900 py-16 md:py-24"
     >
-      <div className="mx-auto grid max-w-6xl gap-14 px-6 md:grid-cols-[1.3fr_1fr] md:items-center md:px-10 md:gap-20">
+      {/* Foto de academia (assets/hugoarruda/fundosobremim.jpeg) como fundo da
+         seção — escurecida com um véu em degradê pra manter o texto legível. */}
+      <Image
+        src="/sobre/fundo-sobremim.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-[75%_15%]"
+        aria-hidden="true"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 60% at 20% 10%, rgba(5,38,43,0.3), transparent 55%), linear-gradient(180deg, rgba(1,9,11,0.82), rgba(5,38,43,0.85) 45%, rgba(5,38,43,0.93))",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-14 px-6 md:grid-cols-[1.3fr_1fr] md:items-center md:px-10 md:gap-20">
         <div>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -67,16 +132,35 @@ export default function Sobre() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative mx-auto aspect-square w-full max-w-xs"
+          className="relative mx-auto h-[340px] w-full max-w-md sm:h-[440px] md:h-[500px] lg:h-[580px]"
         >
-          <div className="absolute inset-0 rounded-full border border-chrome/10" />
-          <div className="absolute inset-6 rounded-full border border-brass/25" />
-          <Image
-            src="/brand/icon.png"
-            alt="Emblema Arruda Army"
-            fill
-            className="object-contain p-14"
-          />
+          {/* Emblema original, mantido como fundo atrás da colagem de fotos. */}
+          <div
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 z-0 aspect-square w-[70%] -translate-x-1/2 -translate-y-1/2"
+          >
+            <div className="absolute inset-0 rounded-full border border-chrome/10" />
+            <div className="absolute inset-6 rounded-full border border-brass/25" />
+            <Image src="/brand/icon.png" alt="" fill className="object-contain p-10" />
+          </div>
+
+          {FOTOS.map((foto) => (
+            <div
+              key={foto.src}
+              style={foto.style}
+              className={`absolute overflow-hidden rounded-2xl border border-chrome/15 bg-teal-800 opacity-90 shadow-xl shadow-ink/50 ${foto.className} ${
+                foto.desktopOnly ? "hidden md:block" : ""
+              }`}
+            >
+              <Image
+                src={foto.src}
+                alt="Hugo Arruda"
+                fill
+                sizes="(max-width: 768px) 45vw, 240px"
+                className="object-cover"
+              />
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
