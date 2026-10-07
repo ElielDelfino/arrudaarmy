@@ -125,13 +125,13 @@ export default function Hero() {
         >
           <a
             href="#inscricao"
-            className="rounded-sm bg-brass px-7 py-3.5 text-center font-mono text-sm uppercase tracking-[0.2em] text-ink transition-colors hover:bg-brass-bright"
+            className="rounded-sm bg-brass px-7 py-3.5 text-center font-heading text-2xl font-semibold text-ink transition-colors hover:bg-brass-bright"
           >
             Comece sua transformação
           </a>
           <a
             href="#metodo"
-            className="rounded-sm border border-chrome/30 px-7 py-3.5 text-center font-mono text-sm uppercase tracking-[0.2em] text-chrome transition-colors hover:border-chrome hover:bg-chrome/5"
+            className="rounded-sm border border-chrome/30 px-7 py-3.5 text-center font-heading text-2xl font-semibold text-chrome transition-colors hover:border-chrome hover:bg-chrome/5"
           >
             Ver o método
           </a>

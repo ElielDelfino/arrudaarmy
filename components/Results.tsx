@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { useIsDesktop } from "@/lib/use-is-desktop";
+import SlideRow from "@/components/SlideRow";
 
 type Angulo = "Frente" | "Costas" | "Lateral";
 
@@ -23,11 +23,11 @@ interface Aluno {
 // Cada arquivo já é um comparativo antes/depois lado a lado por ângulo —
 // ver convenção de nomenclatura em docs/ARCHITECTURE.md.
 //
-// Ordem: quem tem mais ângulos disponíveis vem primeiro; o `id` (AL-0N) segue
-// essa mesma ordem, não o número original do arquivo em assets/alunos/.
+// Ordem: quem tem mais ângulos disponíveis vem primeiro; o `id` ("Aluno - 0N")
+// segue essa mesma ordem, não o número original do arquivo em assets/alunos/.
 const ALUNOS: Aluno[] = [
   {
-    id: "AL-01",
+    id: "Aluno - 01",
     photos: [
       { angulo: "Frente", src: "/results/aluno7-1.webp", width: 1000, height: 1000 },
       { angulo: "Costas", src: "/results/aluno7-2.webp", width: 1000, height: 1000 },
@@ -35,73 +35,87 @@ const ALUNOS: Aluno[] = [
     ],
   },
   {
-    id: "AL-02",
+    id: "Aluno - 02",
     photos: [
       { angulo: "Frente", src: "/results/aluno2-1.webp", width: 1000, height: 1000 },
       { angulo: "Costas", src: "/results/aluno2-2.webp", width: 1000, height: 1000 },
     ],
   },
   {
-    id: "AL-03",
+    id: "Aluno - 03",
     photos: [
       { angulo: "Frente", src: "/results/aluno3-1.webp", width: 1000, height: 828 },
       { angulo: "Costas", src: "/results/aluno3-2.webp", width: 1000, height: 800 },
     ],
   },
   {
-    id: "AL-04",
+    id: "Aluno - 04",
     photos: [
       { angulo: "Frente", src: "/results/aluno4-1.webp", width: 1000, height: 1000 },
       { angulo: "Costas", src: "/results/aluno4-2.webp", width: 1000, height: 1000 },
     ],
   },
-  { id: "AL-05", photos: [{ angulo: "Frente", src: "/results/aluno1.webp", width: 1000, height: 989 }] },
-  { id: "AL-06", photos: [{ angulo: "Frente", src: "/results/aluno5.webp", width: 1000, height: 951 }] },
-  { id: "AL-07", photos: [{ angulo: "Frente", src: "/results/aluno6.webp", width: 1000, height: 1000 }] },
+  { id: "Aluno - 05", photos: [{ angulo: "Frente", src: "/results/aluno1.webp", width: 1000, height: 989 }] },
+  { id: "Aluno - 06", photos: [{ angulo: "Frente", src: "/results/aluno5.webp", width: 1000, height: 951 }] },
+  { id: "Aluno - 07", photos: [{ angulo: "Frente", src: "/results/aluno6.webp", width: 1000, height: 1000 }] },
 ];
 
-function AlunoCard({ aluno, delay }: { aluno: Aluno; delay: number }) {
+interface LightboxState {
+  aluno: Aluno;
+  angleIndex: number;
+}
+
+function AngleTabs({
+  photos,
+  activeIndex,
+  onSelect,
+  size = "sm",
+}: {
+  photos: AlunoPhoto[];
+  activeIndex: number;
+  onSelect: (i: number) => void;
+  size?: "sm" | "md";
+}) {
+  if (photos.length < 2) return null;
+  return (
+    <div className="flex gap-1">
+      {photos.map((p, i) => (
+        <button
+          key={p.angulo}
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect(i);
+          }}
+          aria-pressed={i === activeIndex}
+          className={`rounded-sm font-mono uppercase tracking-[0.15em] transition-colors ${
+            size === "md" ? "px-2.5 py-1.5 text-sm" : "px-2.5 py-1 text-xs"
+          } ${i === activeIndex ? "bg-brass text-ink" : "text-chrome-dim/60 hover:text-chrome"}`}
+        >
+          {p.angulo.slice(0, 3)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function AlunoCard({
+  aluno,
+  onOpen,
+}: {
+  aluno: Aluno;
+  onOpen: (aluno: Aluno, angleIndex: number) => void;
+}) {
   const [active, setActive] = useState(0);
-  const [hovering, setHovering] = useState(false);
-  const hasMultiple = aluno.photos.length > 1;
-
-  // Passar o mouse dá uma prévia do próximo ângulo; clicar avança de verdade.
-  const previewIndex = (active + 1) % aluno.photos.length;
-  const displayIndex = hasMultiple && hovering ? previewIndex : active;
-  const photo = aluno.photos[displayIndex];
-
-  function handleAdvance() {
-    if (!hasMultiple) return;
-    setActive((a) => (a + 1) % aluno.photos.length);
-  }
+  const photo = aluno.photos[active];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -16 }}
-      transition={{ duration: 0.4, delay }}
-      className="group relative overflow-hidden rounded-sm border border-chrome/12 bg-teal-800"
-    >
-      <span className="absolute left-2 top-2 z-10 h-1.5 w-1.5 rounded-full bg-chrome/20" />
-      <span className="absolute right-2 top-2 z-10 h-1.5 w-1.5 rounded-full bg-chrome/20" />
-      <span className="absolute bottom-2 left-2 z-10 h-1.5 w-1.5 rounded-full bg-chrome/20" />
-      <span className="absolute bottom-2 right-2 z-10 h-1.5 w-1.5 rounded-full bg-chrome/20" />
-
-      <div
-        role={hasMultiple ? "button" : undefined}
-        tabIndex={hasMultiple ? 0 : undefined}
-        aria-label={hasMultiple ? `Ver próximo ângulo de ${aluno.id}` : undefined}
-        onClick={handleAdvance}
-        onKeyDown={(e) => {
-          if (hasMultiple && (e.key === "Enter" || e.key === " ")) {
-            e.preventDefault();
-            handleAdvance();
-          }
-        }}
-        onMouseEnter={() => hasMultiple && setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-        className={`relative aspect-[4/5] w-full overflow-hidden md:aspect-square ${hasMultiple ? "cursor-pointer" : ""}`}
+    <div className="group relative w-56 shrink-0 overflow-hidden rounded-lg border border-chrome/15 bg-teal-800 shadow-xl shadow-ink/50 transition-all duration-300 hover:-translate-y-1 hover:border-brass/40 sm:w-64">
+      <button
+        type="button"
+        onClick={() => onOpen(aluno, active)}
+        aria-label={`Ampliar fotos de ${aluno.id}`}
+        className="relative block aspect-[4/5] w-full overflow-hidden"
       >
         <AnimatePresence initial={false}>
           <motion.div
@@ -109,115 +123,44 @@ function AlunoCard({ aluno, delay }: { aluno: Aluno; delay: number }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
             className="absolute inset-0"
           >
             <Image
               src={photo.src}
               alt={`Antes e depois de um aluno do Arruda Army — ângulo ${photo.angulo.toLowerCase()}`}
               fill
-              sizes="(max-width: 768px) 90vw, 33vw"
-              className="object-cover"
+              sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </motion.div>
         </AnimatePresence>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
+      </button>
 
-        {hasMultiple && (
-          <div className="pointer-events-none absolute inset-x-3 top-3 z-10 flex gap-1">
-            {aluno.photos.map((p, i) => (
-              <span
-                key={p.angulo}
-                className={`h-0.5 flex-1 rounded-full transition-colors ${
-                  i === active ? "bg-brass" : "bg-chrome/25"
-                }`}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3">
-        <div>
-          <span className="block font-mono text-[0.65rem] uppercase tracking-[0.3em] text-chrome-dim/60">
-            {aluno.id}
-          </span>
-          <span className="block font-mono text-[0.6rem] uppercase tracking-[0.2em] text-chrome-dim/35">
-            Antes · Depois
-          </span>
+      <div className="px-4 py-3">
+        <span className="block whitespace-nowrap text-center font-mono text-xs uppercase tracking-[0.3em] text-chrome-dim/60">
+          {aluno.id}
+        </span>
+        <div className="mt-1 flex items-center justify-between font-mono text-[0.7rem] uppercase tracking-[0.2em] text-chrome-dim/35">
+          <span>Antes</span>
+          <span>Depois</span>
         </div>
 
-        {hasMultiple && (
-          <div className="flex gap-1">
-            {aluno.photos.map((p, i) => (
-              <button
-                key={p.angulo}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-pressed={i === active}
-                className={`rounded-sm px-2 py-1 font-mono text-[0.6rem] uppercase tracking-[0.15em] transition-colors ${
-                  i === active
-                    ? "bg-brass text-ink"
-                    : "text-chrome-dim/60 hover:text-chrome"
-                }`}
-              >
-                {p.angulo.slice(0, 3)}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Altura reservada mesmo quando não há abas (1 foto só), pra todos
+           os cards — com ou sem ângulos extras — terminarem na mesma altura. */}
+        <div className="mt-2 flex h-7 items-center justify-center">
+          <AngleTabs photos={aluno.photos} activeIndex={active} onSelect={setActive} />
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-function ArrowButton({
-  direction,
-  onClick,
-}: {
-  direction: "prev" | "next";
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={direction === "prev" ? "Aluno anterior" : "Próximo aluno"}
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-chrome/20 text-chrome transition-colors hover:border-brass hover:text-brass-bright md:h-11 md:w-11"
-    >
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        {direction === "prev" ? (
-          <path d="M15 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-        ) : (
-          <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-        )}
-      </svg>
-    </button>
-  );
-}
 
 export default function Results() {
-  const isDesktop = useIsDesktop();
-  const perView = isDesktop ? 3 : 1;
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  function next() {
-    setIndex((i) => (i + 1) % ALUNOS.length);
-  }
-  function prev() {
-    setIndex((i) => (i - 1 + ALUNOS.length) % ALUNOS.length);
-  }
-
-  // Avança automaticamente a cada 3s, como um carrossel — reinicia a contagem
-  // a cada mudança de índice (manual ou automática) e pausa com o mouse em cima.
-  useEffect(() => {
-    if (paused) return;
-    const t = setTimeout(next, 3000);
-    return () => clearTimeout(t);
-  }, [index, paused]);
-
-  const visible = Array.from({ length: perView }, (_, i) => ALUNOS[(index + i) % ALUNOS.length]);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
+  const lightboxPhoto = lightbox?.aluno.photos[lightbox.angleIndex];
 
   return (
     <section
@@ -270,44 +213,97 @@ export default function Results() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-4 max-w-xl text-sm text-chrome-dim/70"
         >
-          Passe o mouse para visualizar. Clique para avançar.
+          Clique numa foto para ampliar. Use as abas pra alternar entre
+          frente, costas e lateral.
         </motion.p>
+      </div>
 
-        <div
-          className="mt-14 flex items-center gap-3 md:gap-5"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <ArrowButton direction="prev" onClick={prev} />
-
-          <div className="min-w-0 flex-1 overflow-hidden">
-            {/* key={index} força o React a remontar o grupo inteiro a cada
-               troca, disparando a entrada com fade em cada card. */}
-            <div key={index} className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-              {visible.map((aluno, i) => (
-                <AlunoCard key={aluno.id} aluno={aluno} delay={i * 0.08} />
-              ))}
-            </div>
-          </div>
-
-          <ArrowButton direction="next" onClick={next} />
-        </div>
-
-        <div className="mt-6 flex justify-center gap-1.5">
-          {ALUNOS.map((aluno, i) => (
-            <button
-              key={aluno.id}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Ir para ${aluno.id}`}
-              aria-current={i === index}
-              className={`h-1.5 rounded-full transition-all ${
-                i === index ? "w-5 bg-brass" : "w-1.5 bg-chrome/20 hover:bg-chrome/40"
-              }`}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.15 }}
+        className="mt-14"
+      >
+        <SlideRow speed={28}>
+          {[...ALUNOS, ...ALUNOS].map((aluno, i) => (
+            <AlunoCard
+              key={`${aluno.id}-${i}`}
+              aluno={aluno}
+              onOpen={(a, angleIndex) => setLightbox({ aluno: a, angleIndex })}
             />
           ))}
-        </div>
-      </div>
+        </SlideRow>
+      </motion.div>
+
+      <AnimatePresence>
+        {lightbox && lightboxPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-ink/90 p-6"
+            onClick={() => setLightbox(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md overflow-hidden rounded-lg border border-chrome/15 bg-teal-800"
+            >
+              <div className="relative">
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={lightboxPhoto.src}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Image
+                      src={lightboxPhoto.src}
+                      alt={`Antes e depois de um aluno do Arruda Army — ângulo ${lightboxPhoto.angulo.toLowerCase()}`}
+                      width={lightboxPhoto.width}
+                      height={lightboxPhoto.height}
+                      className="h-auto max-h-[70vh] w-full object-contain"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                <button
+                  type="button"
+                  onClick={() => setLightbox(null)}
+                  aria-label="Fechar"
+                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-chrome transition-colors hover:text-brass-bright"
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3">
+                <div>
+                  <span className="block font-mono text-xs uppercase tracking-[0.3em] text-chrome-dim/60">
+                    {lightbox.aluno.id}
+                  </span>
+                  <span className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-chrome-dim/35">
+                    Antes · Depois — {lightboxPhoto.angulo}
+                  </span>
+                </div>
+                <AngleTabs
+                  photos={lightbox.aluno.photos}
+                  activeIndex={lightbox.angleIndex}
+                  onSelect={(i) => setLightbox({ aluno: lightbox.aluno, angleIndex: i })}
+                  size="md"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

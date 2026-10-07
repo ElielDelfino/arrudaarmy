@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
+import SlideRow from "@/components/SlideRow";
 
 interface Depoimento {
   src: string;
@@ -50,29 +51,6 @@ function DepoimentoCard({
         className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.03]"
       />
     </button>
-  );
-}
-
-function MarqueeRow({
-  depoimentos,
-  duration,
-  onOpen,
-}: {
-  depoimentos: Depoimento[];
-  duration: number;
-  onOpen: (d: Depoimento) => void;
-}) {
-  return (
-    <div className="group/row relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-      <div
-        className="flex w-max items-center gap-5 group-hover/row:[animation-play-state:paused] sm:gap-6"
-        style={{ animation: `marquee ${duration}s linear infinite` }}
-      >
-        {[...depoimentos, ...depoimentos].map((d, i) => (
-          <DepoimentoCard key={`${d.src}-${i}`} depoimento={d} onOpen={() => onOpen(d)} />
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -130,8 +108,7 @@ export default function Depoimentos() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-4 max-w-xl text-chrome-dim"
         >
-          Conversas reais, direto do WhatsApp e do Instagram. Passe o mouse
-          para pausar, clique em qualquer card para ler na íntegra.
+          Passe o mouse e clique em qualquer card para ler na íntegra.
         </motion.p>
       </div>
 
@@ -140,9 +117,13 @@ export default function Depoimentos() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.15 }}
-        className="relative z-10 mt-14 overflow-hidden rounded-2xl border border-chrome/10 bg-teal-900/5 py-12 backdrop-blur-sm sm:py-16"
+        className="relative z-10 mt-14"
       >
-        <MarqueeRow depoimentos={DEPOIMENTOS} duration={160} onOpen={setOpen} />
+        <SlideRow speed={18}>
+          {[...DEPOIMENTOS, ...DEPOIMENTOS].map((d, i) => (
+            <DepoimentoCard key={`${d.src}-${i}`} depoimento={d} onOpen={() => setOpen(d)} />
+          ))}
+        </SlideRow>
       </motion.div>
 
       <AnimatePresence>
