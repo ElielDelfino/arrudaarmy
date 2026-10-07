@@ -57,22 +57,28 @@ export default function Sobre() {
       id="sobre"
       className="relative flex min-h-screen scroll-mt-20 flex-col justify-center overflow-hidden bg-teal-900 py-16 md:py-24"
     >
-      {/* Foto de academia (assets/hugoarruda/fundosobremim.jpeg) como fundo da
-         seção — escurecida com um véu em degradê pra manter o texto legível. */}
-      <Image
-        src="/sobre/fundo-sobremim.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover object-[75%_15%]"
+      {/* Vídeo de academia como fundo da seção — em loop, mudo, autoplay.
+         MP4 H.264 baseline profile (sem B-frames), 540p 24fps CFR — decode
+         leve em qualquer device. Poster estático enquanto carrega. */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/sobre/fundo-sobremim-poster.webp"
         aria-hidden="true"
-      />
+        className="absolute inset-0 h-full w-full object-cover object-center"
+        disableRemotePlayback
+      >
+        <source src="/sobre/fundo-sobremim.mp4" type="video/mp4" />
+      </video>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 90% 60% at 20% 10%, rgba(5,38,43,0.3), transparent 55%), linear-gradient(180deg, rgba(1,9,11,0.82), rgba(5,38,43,0.85) 45%, rgba(5,38,43,0.93))",
+            "radial-gradient(ellipse 90% 60% at 20% 10%, rgba(5,38,43,0.5), transparent 55%), linear-gradient(180deg, rgba(1,9,11,0.8), rgba(5,38,43,0.82) 45%, rgba(5,38,43,0.88))",
         }}
       />
 
