@@ -26,6 +26,8 @@ export default function Hero() {
       }, 2000);
     };
     video.addEventListener("ended", handleEnded);
+    // Tenta dar play no mobile (pode ser bloqueado pelo browser)
+    video.play().catch(() => {});
     return () => {
       video.removeEventListener("ended", handleEnded);
       clearTimeout(timeout);
@@ -50,6 +52,9 @@ export default function Hero() {
         autoPlay
         muted
         playsInline
+        preload="auto"
+        poster="/brand/hero-bg-poster.webp"
+        disableRemotePlayback
         className="absolute inset-0 h-full w-full object-cover opacity-45 md:object-fill"
       >
         <source src="/brand/hero-bg.mp4" type="video/mp4" />
