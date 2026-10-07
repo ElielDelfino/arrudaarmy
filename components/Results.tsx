@@ -248,11 +248,29 @@ export default function Results() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-4 max-w-xl text-lg text-chrome md:text-xl"
+        >
+          Evoluções reais de quem decidiu levar o processo a sério.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.12 }}
           className="mt-4 max-w-xl text-chrome-dim"
         >
-          Fotos de progresso de alunos do Arruda Army, organizadas como
-          qualquer ficha de acompanhamento: por ângulo, sem filtro. Passe o
-          mouse na foto para uma prévia do próximo ângulo, clique para avançar.
+          Cada registro representa uma transformação construída na
+          consultoria Arruda Army com estratégia, consistência e trabalho
+          duro — sem atalhos e sem promessa fácil.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-4 max-w-xl text-sm text-chrome-dim/70"
+        >
+          Passe o mouse para visualizar. Clique para avançar.
         </motion.p>
 
         <div

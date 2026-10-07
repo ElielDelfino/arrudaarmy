@@ -108,8 +108,13 @@ export default function Hero() {
           transition={{ delay: 0.65, duration: 0.5 }}
           className="max-w-xl font-heading text-xl text-chrome-dim md:text-2xl"
         >
-          Treino e dieta sob comando direto — sem planilha genérica, sem
-          chute. Você entra em formação, eu conduzo cada fase.
+          Treino e dieta sob comando direto.
+          <br />
+          Sem fórmula pronta.
+          <br />
+          Sem achismo.
+          <br />
+          Só estratégia, execução e acompanhamento.
         </motion.p>
 
         <motion.div
