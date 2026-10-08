@@ -44,20 +44,34 @@ const ALUNOS: Aluno[] = [
   {
     id: "Aluno - 03",
     photos: [
-      { angulo: "Frente", src: "/results/aluno3-1.webp", width: 1000, height: 828 },
-      { angulo: "Costas", src: "/results/aluno3-2.webp", width: 1000, height: 800 },
+      { angulo: "Frente", src: "/results/aluna8-1.webp", width: 1000, height: 1252 },
+      { angulo: "Costas", src: "/results/aluna8-2.webp", width: 1000, height: 1252 },
     ],
   },
   {
     id: "Aluno - 04",
     photos: [
+      { angulo: "Frente", src: "/results/aluna9-1.webp", width: 1000, height: 1252 },
+      { angulo: "Costas", src: "/results/aluna9-2.webp", width: 1000, height: 1252 },
+    ],
+  },
+  {
+    id: "Aluno - 05",
+    photos: [
+      { angulo: "Frente", src: "/results/aluno3-1.webp", width: 1000, height: 828 },
+      { angulo: "Costas", src: "/results/aluno3-2.webp", width: 1000, height: 800 },
+    ],
+  },
+  {
+    id: "Aluno - 06",
+    photos: [
       { angulo: "Frente", src: "/results/aluno4-1.webp", width: 1000, height: 1000 },
       { angulo: "Costas", src: "/results/aluno4-2.webp", width: 1000, height: 1000 },
     ],
   },
-  { id: "Aluno - 05", photos: [{ angulo: "Frente", src: "/results/aluno1.webp", width: 1000, height: 989 }] },
-  { id: "Aluno - 06", photos: [{ angulo: "Frente", src: "/results/aluno5.webp", width: 1000, height: 951 }] },
-  { id: "Aluno - 07", photos: [{ angulo: "Frente", src: "/results/aluno6.webp", width: 1000, height: 1000 }] },
+  { id: "Aluno - 07", photos: [{ angulo: "Frente", src: "/results/aluno1.webp", width: 1000, height: 989 }] },
+  { id: "Aluno - 08", photos: [{ angulo: "Frente", src: "/results/aluno5.webp", width: 1000, height: 951 }] },
+  { id: "Aluno - 09", photos: [{ angulo: "Frente", src: "/results/aluno6.webp", width: 1000, height: 1000 }] },
 ];
 
 interface LightboxState {
