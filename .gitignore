@@ -55,3 +55,6 @@ SECRETS-GITHUB.txt
 
 # Intermediários do processamento de imagens (regeneráveis — não commitar)
 assets/
+
+# Material de divulgação (mockups, vídeos — não commitar)
+marketing/
