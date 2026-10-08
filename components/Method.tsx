@@ -29,7 +29,7 @@ export default function Method() {
   return (
     <section
       id="metodo"
-      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center bg-teal-800 py-16 md:py-24"
+      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center bg-teal-800 pt-20 pb-8 md:py-24"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <motion.p
@@ -52,7 +52,7 @@ export default function Method() {
         </motion.h2>
       </div>
 
-      <div className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-sm bg-teal-700 md:mt-16 md:grid-cols-4 md:px-10">
+      <div className="mx-auto mt-6 grid max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-sm bg-teal-700 md:mt-16 md:grid-cols-4 md:px-10">
         {STEPS.map((step, i) => (
           <motion.div
             key={step.n}
@@ -76,7 +76,7 @@ export default function Method() {
       <div className="mx-auto mt-px max-w-6xl md:px-10">
         <a
           href="#inscricao"
-          className="flex flex-col gap-2 bg-brass px-8 py-6 text-ink transition-colors hover:bg-brass-bright sm:flex-row sm:items-center sm:justify-between"
+          className="flex flex-col gap-2 bg-brass px-8 py-5 text-ink transition-colors hover:bg-brass-bright sm:flex-row sm:items-center sm:justify-between md:py-6"
         >
           <span>
             <span className="block font-mono text-xs uppercase tracking-[0.3em] opacity-70">

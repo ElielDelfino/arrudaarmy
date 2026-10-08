@@ -55,7 +55,7 @@ export default function Sobre() {
   return (
     <section
       id="sobre"
-      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center overflow-hidden bg-teal-900 py-16 md:py-24"
+      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center overflow-hidden bg-teal-900 pt-20 pb-8 md:py-24"
     >
       {/* Vídeo de academia como fundo da seção — em loop, mudo, autoplay.
          MP4 H.264 baseline profile (sem B-frames), 540p 24fps CFR — decode
@@ -81,7 +81,7 @@ export default function Sobre() {
         }}
       />
 
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-14 px-6 md:grid-cols-[1.3fr_1fr] md:items-center md:px-10 md:gap-20">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-[1.3fr_1fr] md:items-center md:px-10 md:gap-20">
         <div>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -97,7 +97,7 @@ export default function Sobre() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="mt-3 font-heading text-4xl font-semibold text-chrome md:text-5xl"
+            className="mt-3 font-heading text-3xl font-semibold text-chrome sm:text-4xl md:text-5xl"
           >
             Comando direto, sem terceirização.
           </motion.h2>
@@ -106,7 +106,7 @@ export default function Sobre() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 max-w-xl text-chrome-dim leading-relaxed"
+            className="mt-4 max-w-xl text-sm text-chrome-dim leading-relaxed md:mt-6 md:text-base"
           >
             Na Arruda Army, cada aluno é acompanhado de perto, com estratégia
             construída de acordo com sua rotina, objetivo e evolução. Nada de
@@ -119,7 +119,7 @@ export default function Sobre() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.12 }}
-            className="mt-4 max-w-xl text-chrome-dim leading-relaxed"
+            className="mt-3 max-w-xl text-sm text-chrome-dim leading-relaxed md:mt-4 md:text-base"
           >
             Você não entra para seguir uma fórmula. Entra para seguir uma
             estratégia.
@@ -130,12 +130,12 @@ export default function Sobre() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-8 flex flex-wrap gap-3"
+            className="mt-5 flex flex-wrap gap-2 md:mt-8 md:gap-3"
           >
             {PILARES.map((p) => (
               <li
                 key={p}
-                className="rounded-sm border border-brass/40 px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-brass-bright"
+                className="rounded-sm border border-brass/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] md:px-4 md:py-2 md:text-xs md:tracking-[0.15em] text-brass-bright"
               >
                 {p}
               </li>
@@ -148,7 +148,7 @@ export default function Sobre() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative mx-auto h-[340px] w-full max-w-md sm:h-[440px] md:h-[500px] lg:h-[580px]"
+          className="relative mx-auto h-[min(340px,34svh)] w-full max-w-md sm:h-[440px] md:h-[500px] lg:h-[580px]"
         >
           {/* Emblema original, mantido como fundo atrás da colagem de fotos. */}
           <div

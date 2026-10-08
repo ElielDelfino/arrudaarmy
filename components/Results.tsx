@@ -165,7 +165,7 @@ export default function Results() {
   return (
     <section
       id="resultados"
-      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center bg-teal-900 py-16 md:py-24"
+      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center bg-teal-900 pt-20 pb-8 md:py-20"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <motion.p
@@ -191,7 +191,7 @@ export default function Results() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 max-w-xl text-lg text-chrome md:text-xl"
+          className="mt-3 max-w-xl text-lg text-chrome md:mt-4 md:text-xl"
         >
           Evoluções reais de quem decidiu levar o processo a sério.
         </motion.p>
@@ -200,7 +200,7 @@ export default function Results() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.12 }}
-          className="mt-4 max-w-xl text-chrome-dim"
+          className="mt-3 max-w-xl text-chrome-dim md:mt-4"
         >
           Cada registro representa uma transformação construída na
           consultoria Arruda Army com estratégia, consistência e trabalho
@@ -211,7 +211,7 @@ export default function Results() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-4 max-w-xl text-sm text-chrome-dim/70"
+          className="mt-3 max-w-xl text-sm text-chrome-dim/70 md:mt-4"
         >
           Clique numa foto para ampliar. Use as abas pra alternar entre
           frente, costas e lateral.
@@ -223,7 +223,7 @@ export default function Results() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.15 }}
-        className="mt-14"
+        className="mt-8 md:mt-12"
       >
         <SlideRow speed={28}>
           {[...ALUNOS, ...ALUNOS].map((aluno, i) => (
