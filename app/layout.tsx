@@ -6,7 +6,7 @@ import {
   IBM_Plex_Mono,
 } from "next/font/google";
 import "./globals.css";
-import InstagramFab from "@/components/InstagramFab";
+import FloatingActions from "@/components/FloatingActions";
 
 const bigShoulders = Big_Shoulders_Stencil({
   variable: "--font-big-shoulders-stencil",
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-teal-900 text-chrome">
         <div className="grain" aria-hidden="true" />
         <div className="relative z-10 flex min-h-full flex-1 flex-col">{children}</div>
-        <InstagramFab />
+        <FloatingActions />
       </body>
     </html>
   );

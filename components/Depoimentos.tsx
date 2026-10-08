@@ -60,7 +60,7 @@ export default function Depoimentos() {
   return (
     <section
       id="depoimentos"
-      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center overflow-hidden bg-teal-900 py-16 md:py-24"
+      className="relative flex min-h-screen scroll-mt-20 flex-col justify-center overflow-hidden bg-teal-900 pt-20 pb-8 md:py-20"
     >
       {/* Foto de bastidor de competição (assets/hugoarruda/fundodepoimentos.jpeg)
          como fundo da seção — escurecida com um véu em degradê pra manter o
@@ -97,18 +97,28 @@ export default function Depoimentos() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.05 }}
-          className="mt-3 max-w-2xl font-heading text-4xl font-semibold text-chrome md:text-6xl"
+          className="mt-3 max-w-4xl font-heading text-4xl font-semibold text-chrome md:text-6xl"
         >
-          Quem treina, confirma.
+          Quem vive o processo, confirma.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 max-w-xl text-chrome-dim"
+          className="mt-3 max-w-xl text-lg text-chrome md:mt-4 md:text-xl"
         >
-          Passe o mouse e clique em qualquer card para ler na íntegra.
+          Experiências reais de quem escolheu fazer parte da Army e decidiu
+          levar o processo a sério.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-3 max-w-xl text-sm text-chrome-dim/70 md:mt-4"
+        >
+          Passe o mouse para visualizar. Clique para ler na íntegra.
         </motion.p>
       </div>
 

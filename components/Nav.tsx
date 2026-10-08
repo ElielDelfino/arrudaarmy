@@ -74,30 +74,23 @@ export default function Nav() {
           ))}
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <a
-            href="#inscricao"
-            className="shrink-0 rounded-sm border border-brass px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.15em] text-brass-bright transition-colors hover:bg-brass hover:text-ink sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.2em]"
-          >
-            Comece agora
-          </a>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-chrome/20 text-chrome md:hidden"
-          >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-              {menuOpen ? (
-                <path d="M5 5l14 14M19 5L5 19" strokeLinecap="round" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-              )}
-            </svg>
-          </button>
-        </div>
+        {/* "Comece agora" saiu daqui — agora é o botão flutuante (FloatingActions).
+           Sem ele, os links do desktop ficam encostados à direita. */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-chrome/20 text-chrome md:hidden"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+            {menuOpen ? (
+              <path d="M5 5l14 14M19 5L5 19" strokeLinecap="round" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
       </nav>
 
       <AnimatePresence>
