@@ -65,11 +65,10 @@ export default function Sobre() {
         muted
         loop
         playsInline
-        preload="auto"
+        disableRemotePlayback
         poster="/sobre/fundo-sobremim-poster.webp"
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover object-center"
-        disableRemotePlayback
       >
         <source src="/sobre/fundo-sobremim.mp4" type="video/mp4" />
       </video>
